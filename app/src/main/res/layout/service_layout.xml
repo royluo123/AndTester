@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_out"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="显示区域" />
+
+    <EditText
+        android:id="@+id/et_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btn_start_service"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="startService" />
+
+    <Button
+        android:id="@+id/btn_stop_service"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="stopService" />
+
+    <Button
+        android:id="@+id/btn_bind_service"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="bindService" />
+
+    <Button
+        android:id="@+id/btn_unbind_service"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="unbindService" />
+
+    <Button
+        android:id="@+id/btn_sync_data"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="同步数据" />
+
+</LinearLayout>
