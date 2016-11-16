@@ -1,18 +1,23 @@
 package com.roy.tester.process;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.IBinder;
 import android.content.Context;
 import android.app.ActivityManager;
 import java.util.List;
+import java.util.Calendar;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.app.PendingIntent;
+import android.app.AlarmManager;
 
 /**
  * Created by Administrator on 2016/11/12.
  */
 public class DaemonProcess extends Service{
+    private static final int INTERVAL = 1000 * 60 * 60 * 24;// 24h
 
     private static Thread mThread;
 
@@ -22,9 +27,16 @@ public class DaemonProcess extends Service{
         return null;
     }
 
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startDaemon();
+        scheduleStart();
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     private void startDaemon() {
@@ -80,4 +92,23 @@ public class DaemonProcess extends Service{
         }
 
     }
+
+    public void scheduleStart(){
+        Intent intent = new Intent(this, DaemonReceiver.class);
+        PendingIntent sender = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        // Schedule the alarm!
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        am.cancel(sender);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 20);
+        calendar.set(Calendar.SECOND, 10);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), INTERVAL, sender);
+    }
+
+
 }

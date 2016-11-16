@@ -10,7 +10,7 @@ public class Constant {
     public static final String COLUMN_NAME = "name";  
        
        
-    public static final String AUTOHORITY = "cn.scu.myprovider";  
+    public static final String AUTOHORITY = "com.roy.myprovider";
     public static final int ITEM = 1;  
     public static final int ITEM_ID = 2;  
        

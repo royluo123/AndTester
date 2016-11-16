@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.roy.tester.aidl.AidlClientActivity;
 import com.roy.tester.gp.GpAccountActivity;
 import com.roy.tester.process.DaemonProcess;
+import com.roy.tester.provider.ProviderActivity;
 import com.roy.tester.service.TestActivity;
 import com.roy.tester.tpaint.PaintActivity;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         testDatas.add(new TestData("Service", TestActivity.class));
         testDatas.add(new TestData("Aidl", AidlClientActivity.class));
         testDatas.add(new TestData("GP Account", GpAccountActivity.class));
+        testDatas.add(new TestData("Content Provider", ProviderActivity.class));
         TestAdapter adapter = new TestAdapter(this, testDatas);
         mListView.setAdapter(adapter);
 
