@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+   <Button 
+       android:id="@+id/button_get_token"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="获取Token"
+       />
+   
+   <Button 
+       android:id="@+id/button_get_user_profile"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="获取用户信息"
+       />
+
+   <TextView 
+       android:id="@+id/text_view_user_info"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       />
+</LinearLayout>
