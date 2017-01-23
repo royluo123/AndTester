@@ -11,7 +11,29 @@
         android:textSize="15sp"
         android:textColor="#ffffff"
         android:layout_centerInParent="true"
-        android:id="@+id/tv"
+        android:id="@+id/provider_tv"
         />
-    
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/provider_tv"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set Data"
+            android:id="@+id/provider_button1"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get Data"
+            android:id="@+id/provider_button2"
+           />
+    </LinearLayout>
+
 </RelativeLayout>

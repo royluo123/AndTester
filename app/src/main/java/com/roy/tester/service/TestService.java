@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.Binder;
+import android.util.Log;
 
 
 /**
@@ -11,13 +12,13 @@ import android.os.Binder;
  */
 
 public class TestService extends Service {
-    private String data = "默认消息";
+    private String data = "service default data";
     private boolean serviceRunning = false;
 
     // 必须实现的方法，用于返回Binder对象
     @Override
     public IBinder onBind(Intent intent) {
-        System.out.println("--onBind()--");
+        Log.i("lxw","TestService--onBind()--");
         return new MyBinder();
     }
 
@@ -35,7 +36,7 @@ public class TestService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        System.out.println("--onCreate()--");
+        Log.i("lxw","TestService--onCreate()--");
         serviceRunning = true;
         new Thread() {
             @Override
@@ -44,10 +45,11 @@ public class TestService extends Service {
                 while (serviceRunning) {
                     n++;
                     String str = n + data;
-                    System.out.println(str);
+                    Log.i("lxw","TestService :" + str);
                     if (dataCallback != null) {
                         dataCallback.dataChanged(str);
                     }
+
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
@@ -61,7 +63,7 @@ public class TestService extends Service {
     // 每次启动Servcie时都会调用该方法
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        System.out.println("--onStartCommand()--");
+        Log.i("lxw","TestService--onStartCommand()--");
         data = intent.getStringExtra("data");
         return super.onStartCommand(intent, flags, startId);
     }
@@ -69,7 +71,7 @@ public class TestService extends Service {
     // 解绑Servcie调用该方法
     @Override
     public boolean onUnbind(Intent intent) {
-        System.out.println("--onUnbind()--");
+        Log.i("lxw","TestService--onUnbind()--");
         return super.onUnbind(intent);
     }
 
@@ -77,7 +79,7 @@ public class TestService extends Service {
     @Override
     public void onDestroy() {
         serviceRunning = false;
-        System.out.println("--onDestroy()--");
+        Log.i("lxw","TestService--onDestroy()--");
         super.onDestroy();
     }
 

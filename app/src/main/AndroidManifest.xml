@@ -21,15 +21,18 @@
         <activity android:name="com.roy.tester.tpaint.PaintActivity">
         </activity>
 
+        <!--Service-->
         <service android:name="com.roy.tester.service.TestService">
         </service>
 
+        <!--Background Process-->
         <service
             android:name="com.roy.tester.process.DaemonProcess"
             android:exported="false"
             android:process=":DaemonProcess" >
         </service>
 
+        <!--AIDL-->
         <activity android:name="com.roy.tester.aidl.AidlClientActivity"
              android:label="@string/app_name">
         </activity>
@@ -44,7 +47,8 @@
                 <action android:name="com.roy.tester.aidl.IAidlService" />
             </intent-filter>
         </service>
-		
+
+        <!--GP-->
 		<activity
             android:name="com.roy.tester.gp.GpAccountActivity"
             android:label="@string/app_name"
@@ -52,15 +56,20 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
 
+        <!--System Data Manager-->
         <activity android:name="com.roy.tester.systemdata.SystemDataManagerActivity"
             android:label="@string/app_name"
             android:process=":DaemonProcess">
         </activity>
 
+        <!--Provider-->
         <activity android:name="com.roy.tester.provider.ProviderActivity"
             android:label="@string/app_name">
         </activity>
 
+        <provider android:name="com.roy.tester.provider.MyProvider" android:authorities="com.roy.myprovider" />
+
+        <!--Alarm-->
         <receiver android:name="com.roy.tester.process.DaemonReceiver"
             android:process=":DaemonProcess" >
             <intent-filter>
@@ -68,7 +77,6 @@
             </intent-filter>
         </receiver>
 
-        <provider android:name="com.roy.tester.provider.MyProvider" android:authorities="com.roy.myprovider" />
     </application>
 	
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />

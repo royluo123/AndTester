@@ -20,6 +20,7 @@ import com.roy.tester.mytester.R;
 
 /**
  * Created by Administrator on 2016/11/11.
+ * 生命周期与数据交互
  */
 
 public class TestActivity extends Activity implements OnClickListener {
@@ -119,7 +120,9 @@ public class TestActivity extends Activity implements OnClickListener {
         btn_unbind_service = (Button) findViewById(R.id.btn_unbind_service);
         btn_sync_data = (Button) findViewById(R.id.btn_sync_data);
         et_data = (EditText) findViewById(R.id.et_data);
+        et_data.setText("input");
         tv_out = (TextView) findViewById(R.id.tv_out);
+        tv_out.setText("display");
     }
 
     private void setOnClick() {

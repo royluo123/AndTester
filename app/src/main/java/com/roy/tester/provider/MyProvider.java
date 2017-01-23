@@ -22,8 +22,7 @@ public class MyProvider extends ContentProvider {
     }    
     
     @Override    
-    public int delete(Uri uri, String selection, String[] selectionArgs) {    
-        // TODO Auto-generated method stub    
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
         return 0;    
     }    
     
@@ -40,8 +39,7 @@ public class MyProvider extends ContentProvider {
     }    
     
     @Override    
-    public Uri insert(Uri uri, ContentValues values) {    
-        // TODO Auto-generated method stub    
+    public Uri insert(Uri uri, ContentValues values) {
         long rowId;    
         if(mMatcher.match(uri)!=Constant.ITEM){    
             throw new IllegalArgumentException("Unknown URI"+uri);    
@@ -57,8 +55,7 @@ public class MyProvider extends ContentProvider {
     }    
     
     @Override    
-    public boolean onCreate() {    
-        // TODO Auto-generated method stub    
+    public boolean onCreate() {
         mDbHelper = new DBHelper(getContext());    
     
         db = mDbHelper.getReadableDatabase();    
@@ -68,8 +65,7 @@ public class MyProvider extends ContentProvider {
     
     @Override    
     public Cursor query(Uri uri, String[] projection, String selection,    
-            String[] selectionArgs, String sortOrder) {    
-        // TODO Auto-generated method stub    
+            String[] selectionArgs, String sortOrder) {
         Cursor c = null;    
         switch (mMatcher.match(uri)) {    
         case Constant.ITEM:    
@@ -88,8 +84,7 @@ public class MyProvider extends ContentProvider {
     
     @Override    
     public int update(Uri uri, ContentValues values, String selection,    
-            String[] selectionArgs) {    
-        // TODO Auto-generated method stub    
+            String[] selectionArgs) {
         return 0;    
     }    
     
