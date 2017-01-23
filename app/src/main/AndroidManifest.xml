@@ -3,6 +3,7 @@
     package="com.roy.tester.mytester">
 
     <application
+        android:name="com.roy.tester.mytester.TestApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -76,6 +77,10 @@
                 <action android:name="com.roy.tester.alarm"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name="com.roy.tester.greendao.GreenDaoActivity"
+            android:label="@string/app_name">
+        </activity>
 
     </application>
 	
