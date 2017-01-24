@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.roy.tester.aidl.AidlClientActivity;
 import com.roy.tester.gp.GpAccountActivity;
 import com.roy.tester.greendao.GreenDaoActivity;
+import com.roy.tester.okhttp.OkHttpActivity;
 import com.roy.tester.process.DaemonProcess;
 import com.roy.tester.provider.ProviderActivity;
 import com.roy.tester.service.TestActivity;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         testDatas.add(new TestData("GP Account", GpAccountActivity.class));
         testDatas.add(new TestData("Content Provider", ProviderActivity.class));
         testDatas.add(new TestData("GreenDao", GreenDaoActivity.class));
+        testDatas.add(new TestData("OKHttp", OkHttpActivity.class));
         TestAdapter adapter = new TestAdapter(this, testDatas);
         mListView.setAdapter(adapter);
 
