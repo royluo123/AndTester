@@ -86,6 +86,11 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity android:name="com.roy.tester.vpn.ToyVpnActivity"
+            android:label="@string/app_name">
+        </activity>
+
+
     </application>
 	
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />

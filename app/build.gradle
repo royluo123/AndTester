@@ -21,7 +21,7 @@ android {
 }
 
 greendao {
-    schemaVersion 1//数据可版本
+    schemaVersion 1//数据版本
     daoPackage 'com.roy.tester.greendao'//生成的帮助类所在的目录文件夹
     targetGenDir 'src/main/java'
 }

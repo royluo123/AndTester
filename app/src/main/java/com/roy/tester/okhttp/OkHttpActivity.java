@@ -43,7 +43,7 @@ public class OkHttpActivity extends Activity implements HttpExcutor.ExcuteListen
         btnGet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHttpExcutor.excute();
+                mHttpExcutor.get();
             }
         });
     }
