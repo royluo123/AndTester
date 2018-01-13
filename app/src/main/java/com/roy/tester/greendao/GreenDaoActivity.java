@@ -6,7 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.roy.tester.mytester.EventDefination.MessageEvent;
 import com.roy.tester.mytester.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -35,6 +40,11 @@ public class GreenDaoActivity extends Activity {
                 person.setName("Lily");
                 person.setSex("Femal");
                 mPersonDao.insert(person);
+
+                MessageEvent event = new MessageEvent();
+                event.id = 1;
+                event.arg = "From GreenDao";
+                EventBus.getDefault().post(event);
             }
         });
 
@@ -52,4 +62,24 @@ public class GreenDaoActivity extends Activity {
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+
+        super.onStop();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+
+    }
+
 }

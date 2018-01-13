@@ -22,6 +22,16 @@
         <activity android:name="com.roy.tester.tpaint.PaintActivity">
         </activity>
 
+        <activity android:name="com.roy.tester.web.WebViewActivity">
+        </activity>
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <!--Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+        <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity" android:theme="@style/Theme.IAPTheme"/>
+        <activity android:name="com.roy.tester.ads.AdsActivity">
+        </activity>
+
         <!--Service-->
         <service android:name="com.roy.tester.service.TestService">
         </service>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.roy.tester.ads.AdsActivity;
 import com.roy.tester.aidl.AidlClientActivity;
 import com.roy.tester.gp.GpAccountActivity;
 import com.roy.tester.greendao.GreenDaoActivity;
@@ -17,6 +18,11 @@ import com.roy.tester.provider.ProviderActivity;
 import com.roy.tester.service.TestActivity;
 import com.roy.tester.tpaint.PaintActivity;
 import com.roy.tester.vpn.ToyVpnActivity;
+import com.roy.tester.web.WebViewActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView)findViewById(R.id.listView);
         ArrayList<TestData> testDatas = new ArrayList<>();
+        testDatas.add(new TestData("Webview", WebViewActivity.class));
+        testDatas.add(new TestData("Ad", AdsActivity.class));
         testDatas.add(new TestData("Temporary Test", PaintActivity.class));
         testDatas.add(new TestData("Service", TestActivity.class));
         testDatas.add(new TestData("Aidl", AidlClientActivity.class));
@@ -44,5 +52,28 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("lxw", "start DaemonProcess");
         startService(new Intent(this, DaemonProcess.class));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+
+        super.onStop();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventDefination.MessageEvent event) {
+        if(event.id == 1){
+            if(event.arg instanceof String){
+
+            }
+        }
     }
 }
