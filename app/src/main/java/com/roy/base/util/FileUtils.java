@@ -334,7 +334,7 @@ public class FileUtils {
     /**
      *
      * @param item
-     * @param stack£º
+     * @param stackï¼š
      * @return
      */
     public static float caculateFileSize(File item, float stack) {
@@ -399,7 +399,7 @@ public class FileUtils {
             return ALREADY_FILE;
         }
         if (item.renameTo(newFileTmp)) {
-            newFileTmp.setLastModified(System.currentTimeMillis());//0075062¡¾ÒÆÖ²Í¬²½¡¿ ÔÚÎÄ¼ş¹ÜÀí£¬´´½¨Ò»¸öÎÄ¼ş¼Ğ£¬¸ô¼¸·ÖÖÓºóÔÙĞŞ¸ÄËü£¬Ò³ÃæÊôĞÔÖĞµÄĞŞ¸ÄÈÕÆÚÃ»ÓĞ±ä»¯
+            newFileTmp.setLastModified(System.currentTimeMillis());//0075062ã€ç§»æ¤åŒæ­¥ã€‘ åœ¨æ–‡ä»¶ç®¡ç†ï¼Œåˆ›å»ºä¸€ä¸ªæ–‡ä»¶å¤¹ï¼Œéš”å‡ åˆ†é’Ÿåå†ä¿®æ”¹å®ƒï¼Œé¡µé¢å±æ€§ä¸­çš„ä¿®æ”¹æ—¥æœŸæ²¡æœ‰å˜åŒ–
             return SUCCESS;
         }
         return UNKONW_ERROR;
@@ -676,7 +676,7 @@ public class FileUtils {
         try {
             if (isDiskMounted()) {
                 StatFs statFs = new StatFs(getExternalStorage().getPath());
-                sDiskAvailableSize = 1L * statFs.getBlockSize() * statFs.getAvailableBlocks();//¼Ó¸ö1L·ÀÖ¹Êı×éÔ½½ç 0059855: ¡¾ÏÂÔØ¡¿sdcardÊ£ÓàÈİÁ¿³¬¹ı2GÊ±£¬ÈôÏÂÔØ³ö´í£¬»á´íÎóÌáÊ¾sdcard¿Õ¼ä²»×ã
+                sDiskAvailableSize = 1L * statFs.getBlockSize() * statFs.getAvailableBlocks();//åŠ ä¸ª1Lé˜²æ­¢æ•°ç»„è¶Šç•Œ 0059855: ã€ä¸‹è½½ã€‘sdcardå‰©ä½™å®¹é‡è¶…è¿‡2Gæ—¶ï¼Œè‹¥ä¸‹è½½å‡ºé”™ï¼Œä¼šé”™è¯¯æç¤ºsdcardç©ºé—´ä¸è¶³
             }
         } catch (Throwable e) {
             //#if debug == true

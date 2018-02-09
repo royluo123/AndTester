@@ -16,6 +16,7 @@ import com.roy.tester.okhttp.OkHttpActivity;
 import com.roy.tester.process.DaemonProcess;
 import com.roy.tester.provider.ProviderActivity;
 import com.roy.tester.service.TestActivity;
+import com.roy.tester.thread.MultiThreadTestActivity;
 import com.roy.tester.tpaint.PaintActivity;
 import com.roy.tester.vpn.ToyVpnActivity;
 import com.roy.tester.web.WebViewActivity;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         testDatas.add(new TestData("Webview", WebViewActivity.class));
         testDatas.add(new TestData("Ad", AdsActivity.class));
         testDatas.add(new TestData("Temporary Test", PaintActivity.class));
+        testDatas.add(new TestData("MultiThread Test", MultiThreadTestActivity.class));
         testDatas.add(new TestData("Service", TestActivity.class));
         testDatas.add(new TestData("Aidl", AidlClientActivity.class));
         testDatas.add(new TestData("GP Account", GpAccountActivity.class));
