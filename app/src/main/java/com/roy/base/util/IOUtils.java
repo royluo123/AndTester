@@ -182,7 +182,7 @@ public final class IOUtils {
     
     
     /**
-     * byte[] ºÏÆ´
+     * byte[]
      * @param a byte[]
      * @param b byte[]
      * @return byte[]
