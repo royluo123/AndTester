@@ -15,6 +15,7 @@ import com.roy.tester.greendao.GreenDaoActivity;
 import com.roy.tester.okhttp.OkHttpActivity;
 import com.roy.tester.process.DaemonProcess;
 import com.roy.tester.provider.ProviderActivity;
+import com.roy.tester.security.SecurityActivity;
 import com.roy.tester.service.TestActivity;
 import com.roy.tester.thread.MultiThreadTestActivity;
 import com.roy.tester.tpaint.PaintActivity;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView)findViewById(R.id.listView);
         ArrayList<TestData> testDatas = new ArrayList<>();
         testDatas.add(new TestData("Webview", WebViewActivity.class));
+        testDatas.add(new TestData("Security", SecurityActivity.class));
         testDatas.add(new TestData("Ad", AdsActivity.class));
         testDatas.add(new TestData("Temporary Test", PaintActivity.class));
         testDatas.add(new TestData("MultiThread Test", MultiThreadTestActivity.class));
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         testDatas.add(new TestData("GreenDao", GreenDaoActivity.class));
         testDatas.add(new TestData("OKHttp", OkHttpActivity.class));
         testDatas.add(new TestData("VPN", ToyVpnActivity.class));
+
         TestAdapter adapter = new TestAdapter(this, testDatas);
         mListView.setAdapter(adapter);
 

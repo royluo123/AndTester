@@ -19,12 +19,13 @@ import java.util.List;
  * Created by Administrator on 2017/1/20.
  */
 public class GreenDaoActivity extends Activity {
-    PersonDao mPersonDao;
-    TextView mTextView;
+    private PersonDao mPersonDao;
 
+    private TextView mTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.green_dao_layout);
 
         mPersonDao = GreenDaoManager.getInstance().getDaoSession().getPersonDao();
