@@ -47,10 +47,13 @@ public class GpAccountActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.gp_account_layout);
 		mAccountManager = AccountManager.get(this);
+
 		mButtonGetToken = (Button) findViewById(R.id.button_get_token);
 		mButtonGetToken.setOnClickListener(this);
 		mButtonGetProfile = (Button) findViewById(R.id.button_get_user_profile);
 		mButtonGetProfile.setOnClickListener(this);
+		Button btnGetInfo = (Button) findViewById(R.id.button_get_system_info);
+		btnGetInfo.setOnClickListener(this);
 		mTextViewResult = (TextView) findViewById(R.id.text_view_user_info);
 	}
 
@@ -67,17 +70,30 @@ public class GpAccountActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.button_get_token:
-			getUserToken();
-			break;
+			case R.id.button_get_token:
+				getUserToken();
+				break;
 
-		case R.id.button_get_user_profile:
-			getUserProfile();
-			break;
-
-		default:
-			break;
+			case R.id.button_get_user_profile:
+				getUserProfile();
+				break;
+			case R.id.button_get_system_info:
+				getSystemInfo();
+				break ;
+			default:
+				break;
 		}
+	}
+
+	private void getSystemInfo(){
+		String lang = getResources().getConfiguration().locale.getLanguage();
+		String langDisplay = getResources().getConfiguration().locale.getDisplayLanguage();
+		String country = getResources().getConfiguration().locale.getCountry();
+		String countryDisplay = getResources().getConfiguration().locale.getDisplayCountry();
+
+		String text = "  lang = " + lang + ", dispaly lang = " + langDisplay +
+					  ", \r\n country = " + country + ", display country = " + countryDisplay;
+		mTextViewResult.setText(text);
 	}
 
 	private void getUserProfile() {

@@ -19,6 +19,13 @@
        android:text="获取用户信息"
        />
 
+    <Button
+            android:id="@+id/button_get_system_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取系统信息"
+    />
+
    <TextView 
        android:id="@+id/text_view_user_info"
        android:layout_width="match_parent"
