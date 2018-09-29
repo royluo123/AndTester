@@ -2,6 +2,7 @@ package com.roy.tester.ads;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -38,10 +39,14 @@ public class AdsActivity extends Activity{
     private static final String ADMOB_APP_ID = "ca-app-pub-3940256099942544~3347511713";
 
     private Button mRefresh;
+    private Button mDestroy;
+    private Button mShow;
     private CheckBox mRequestAppInstallAds;
     private CheckBox mRequestContentAds;
     private CheckBox mStartVideoAdsMuted;
     private TextView mVideoStatus;
+
+    private NativeAd mNativeAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class AdsActivity extends Activity{
         setContentView(R.layout.ads_layout);
 
         mRefresh = (Button)findViewById(R.id.btn_refresh);
+        mDestroy = (Button)findViewById(R.id.btn_destory);
+        mShow = (Button)findViewById(R.id.btn_show);
         mRequestAppInstallAds = (CheckBox)findViewById(R.id.cb_appinstall);
         mRequestContentAds = (CheckBox) findViewById(R.id.cb_content);
         mStartVideoAdsMuted = (CheckBox) findViewById(R.id.cb_start_muted);
@@ -65,8 +72,21 @@ public class AdsActivity extends Activity{
             }
         });
 
-        refreshAd(mRequestAppInstallAds.isChecked(),
-                mRequestContentAds.isChecked());
+        mShow.setEnabled(false);
+        mShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                showAd();
+            }
+        });
+
+        mDestroy.setEnabled(false);
+        mDestroy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                destory();
+            }
+        });
     }
 
     /**
@@ -228,12 +248,11 @@ public class AdsActivity extends Activity{
             builder.forAppInstallAd(new NativeAppInstallAd.OnAppInstallAdLoadedListener() {
                 @Override
                 public void onAppInstallAdLoaded(NativeAppInstallAd ad) {
-                    FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fl_adplaceholder);
-                    NativeAppInstallAdView adView = (NativeAppInstallAdView) getLayoutInflater()
-                            .inflate(R.layout.ad_app_install, null);
-                    populateAppInstallAdView(ad, adView);
-                    frameLayout.removeAllViews();
-                    frameLayout.addView(adView);
+                    Log.d("Admob", "onAppInstallAdLoaded");
+                    mNativeAd = ad;
+                    mRefresh.setEnabled(true);
+                    mShow.setEnabled(true);
+                    mDestroy.setEnabled(true);
                 }
             });
         }
@@ -242,12 +261,11 @@ public class AdsActivity extends Activity{
             builder.forContentAd(new NativeContentAd.OnContentAdLoadedListener() {
                 @Override
                 public void onContentAdLoaded(NativeContentAd ad) {
-                    FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fl_adplaceholder);
-                    NativeContentAdView adView = (NativeContentAdView) getLayoutInflater()
-                            .inflate(R.layout.ad_content, null);
-                    populateContentAdView(ad, adView);
-                    frameLayout.removeAllViews();
-                    frameLayout.addView(adView);
+                    Log.d("Admob", "onContentAdLoaded");
+                    mNativeAd = ad;
+                    mRefresh.setEnabled(true);
+                    mShow.setEnabled(true);
+                    mDestroy.setEnabled(true);
                 }
             });
         }
@@ -262,17 +280,72 @@ public class AdsActivity extends Activity{
 
         builder.withNativeAdOptions(adOptions);
 
-        AdLoader adLoader = builder.withAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                mRefresh.setEnabled(true);
-                Toast.makeText(AdsActivity.this, "Failed to load native ad: "
-                        + errorCode, Toast.LENGTH_SHORT).show();
-            }
-        }).build();
+        AdLoader adLoader = builder.withAdListener(mAdListener).build();
 
         adLoader.loadAd(new AdRequest.Builder().build());
 
         mVideoStatus.setText("");
+    }
+
+    AdListener mAdListener = new AdListener() {
+        @Override
+        public void onAdClosed() {
+            Log.d("Admob", "onAdClosed");
+        }
+
+        @Override
+        public void onAdFailedToLoad(final int errorCode) {
+            Log.d("Admob", "onAdFaildLoad");
+            mRefresh.setEnabled(true);
+            Toast.makeText(AdsActivity.this, "Failed to load native ad: "
+                                             + errorCode, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onAdLeftApplication() {
+            Log.d("Admob", "onAdLeftApplication");
+        }
+
+        @Override
+        public void onAdLoaded() {
+            Log.d("Admob", "onAdLoaded");
+        }
+
+        @Override
+        public void onAdOpened() {
+            Log.d("Admob", "onAdOpened");
+        }
+    };
+
+    private void showAd(){
+        mShow.setEnabled(false);
+        FrameLayout frameLayout = (FrameLayout)findViewById(R.id.fl_adplaceholder);
+
+        if(mNativeAd instanceof NativeContentAd){
+            NativeContentAdView adView = (NativeContentAdView) getLayoutInflater()
+                                                                 .inflate(R.layout.ad_content, null);
+            populateContentAdView((NativeContentAd)mNativeAd, adView);
+            frameLayout.removeAllViews();
+            frameLayout.addView(adView);
+        }else if(mNativeAd instanceof NativeAppInstallAd){
+            NativeAppInstallAdView adView = (NativeAppInstallAdView) getLayoutInflater()
+                                                                 .inflate(R.layout.ad_content, null);
+            populateAppInstallAdView((NativeAppInstallAd)mNativeAd, adView);
+            frameLayout.removeAllViews();
+            frameLayout.addView(adView);
+        }
+
+    }
+
+    private void destory(){
+        if(mNativeAd instanceof NativeAppInstallAd){
+            ((NativeAppInstallAd) mNativeAd).destroy();
+        }else if(mNativeAd instanceof NativeContentAd){
+            ((NativeContentAd) mNativeAd).destroy();
+        }
+        //if (mNativeAdView instanceof NativeContentAdView || mNativeAdView instanceof NativeAppInstallAdView) {
+        //    mNativeAdView.setOnClickListener(null);
+        //    mNativeAdView.setOnTouchListener(null);
+        //}
     }
 }
